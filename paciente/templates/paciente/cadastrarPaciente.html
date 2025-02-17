@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindCare - Cadastrar Paciente</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .sidebar {
+            background-color: #E0E7FF;
+            height: 100vh;
+            padding: 20px 10px;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: #6B7280;
+            display: block;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .sidebar a:hover {
+            color: #4F46E5;
+        }
+
+        .main-content {
+            padding: 20px;
+        }
+
+        .table-wrapper {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary {
+            background-color: #4F46E5;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #3B3AC8;
+        }
+
+        .pagination {
+            justify-content: flex-end;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-2 sidebar d-flex flex-column align-items-center">
+                <img src="https://img.icons8.com/ios/452/mental-health.png" alt="Logo" width="100" class="mb-4">
+                <a href="{% url 'account:home' %}"><i class="bi bi-house-door-fill fs-3"></i>Home</a>
+                <a href="#"><i class="bi bi-calendar-event fs-3"></i> Consultas</a>
+                <a href="{% url 'paciente:listar_paciente' %}">
+                    <i class="bi bi-people fs-3"></i> Pacientes
+                </a>
+                <a href="#"><i class="bi bi-person-badge fs-3"></i>Profissionais</a>
+                <a href="{% url 'account:sair' %}"><i class="bi bi-arrow-repeat fs-3"></i>Sair do Sistema</a>
+                <div class="mt-auto text-center">
+                    <a href="https://github.com/eduardamoreiira" class="d-block text-secondary mb-2">Ajuda</a>
+                    <a href="#" class="d-block text-secondary">Configurações</a>
+                    <a href="https://github.com/eduardamoreiira" class="text-muted mt-4" style="font-size: 0.8rem;">Desenvolvido por Eduarda Moreira</a>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-10 main-content">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2>MindCare</h2>
+                    <div class="d-flex align-items-center">
+                        <span class="me-3">{{ request.user.username }}</span>
+                        <i class="bi bi-person-circle fs-4"></i>
+                    </div>
+                </div>
+
+                <div class="table-wrapper">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h4>Cadastrar Paciente</h4>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <form method="post" action="{% url 'paciente:cadastrar_paciente' %}">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label for="nome">Nome:</label>
+                                    <input type="text" id="nome" name="nome" class="form-control" required>
+                                </div> </br>
+                                <div class="form-group">
+                                    <label for="cpf">CPF:</label>
+                                    <input type="text" id="cpf" name="cpf" class="form-control" required>
+                                </div> </br>
+                                <div class="mb-3">
+                                    <label for="data_nascimento" class="form-label">Data de Nascimento</label>
+                                    <input type="date" class="form-control" id="data_nascimento" name="data_nascimento" value="{{ paciente.dt_nasc|date:'Y-m-d' }}" required>
+                                </div> </br>
+                                <div class="form-group">
+                                    <label for="sexo">Sexo:</label>
+                                    <select id="sexo" name="sexo" class="form-control">
+                                        <option value="M">Masculino</option>
+                                        <option value="F">Feminino</option>
+                                    </select>
+                                </div> </br>
+                                <div class="form-group">
+                                    <label for="telefone">Telefone:</label>
+                                    <input type="text" id="telefone" name="telefone" class="form-control">
+                                </div> </br>
+                                <div class="form-group">
+                                    <label for="email">E-mail:</label>
+                                    <input type="email" id="email" name="email" class="form-control">
+                                </div> </br>        
+                                <div class="form-group d-flex justify-content-between">
+                                    <button type="submit" class="btn btn-primary" >Cadastrar</button>
+                                    <a href="{% url 'paciente:listar_paciente' %}"
+                                        class="btn btn-secondary">Cancelar</a>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

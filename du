@@ -1,0 +1,27 @@
+                    List of relations
+ Schema |            Name             | Type  |  Owner   
+--------+-----------------------------+-------+----------
+ public | auth_group                  | table | postgres
+ public | auth_group_permissions      | table | postgres
+ public | auth_permission             | table | postgres
+ public | auth_user                   | table | postgres
+ public | auth_user_groups            | table | postgres
+ public | auth_user_user_permissions  | table | postgres
+ public | consulta                    | table | postgres
+ public | django_admin_log            | table | postgres
+ public | django_content_type         | table | postgres
+ public | django_migrations           | table | postgres
+ public | django_session              | table | postgres
+ public | login                       | table | postgres
+ public | paciente                    | table | postgres
+ public | paciente_consulta           | table | postgres
+ public | paciente_login              | table | postgres
+ public | paciente_paciente           | table | postgres
+ public | paciente_profissional       | table | postgres
+ public | paciente_registrotratamento | table | postgres
+ public | paciente_tratamento         | table | postgres
+ public | profissional                | table | postgres
+ public | registro_tratamento         | table | postgres
+ public | tratamento                  | table | postgres
+(22 rows)
+

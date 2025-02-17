@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <!-- Script para exibir o Pop-Up de erro -->
+    <script>
+        // Verifica se há mensagens de erro
+        {% if messages %}
+            {% for message in messages %}
+                alert("{{ message }}");  // Exibe o Pop-Up com a mensagem de erro
+            {% endfor %}
+        {% endif %}
+    </script>
+
+<div class="container d-flex justify-content-center align-items-center vh-100 bg-custom">
+    <div class="card login-card p-4">
+        <div class="text-center mb-4">
+            <img src="https://img.icons8.com/ios/452/mental-health.png" width="100" height="100">
+            <h2 class="mt-2">MINDCARE</h2>
+            <p class="text-muted">Cuidando do seu bem-estar psicológico</p>
+        </div>
+
+        <form action="{% url 'account:login' %}" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="inputNome">Usuário:</label>
+                <input type="text" class="form-control input-field" id="inputNome" placeholder="Digite Aqui" name="username" required>
+            </div>
+            <div class="form-group mt-3">
+                <label for="inputPassword">Senha:</label>
+                <input type="password" class="form-control input-field" id="inputPassword" placeholder="Digite Aqui" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block mt-4">Entrar</button>
+        </form> </br>
+        <footer class="container-fluid bg-5 text-center">
+            <p>© 2025 MINDCARE. Todos os direitos reservados. Desenvolvido por <a href="https://github.com/eduardamoreiira">Eduarda Moreira.</a></p>
+        </footer>
+    </div>
+</div>
+
+
+
+{% endblock content %}

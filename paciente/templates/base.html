@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Pacientes{% endblock %}</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="container mt-4">
+        <!-- Header -->
+        <header class="mb-4">
+            <h1 class="text-center">Gestão de Pacientes</h1>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light rounded">
+                <div class="container-fluid">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'paciente:listar_paciente' %}">Listar Pacientes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'paciente:cadastrar_paciente' %}">Cadastrar Paciente</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'paciente:editar_paciente' paciente_id=0 %}">Editar Paciente</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'paciente:excluir_paciente' paciente_id=0 %}">Excluir Paciente</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            {% block content %}
+            <p>Conteúdo principal aqui.</p>
+            {% endblock %}
+        </main>
+
+        <!-- Footer -->
+        <footer class="mt-4 text-center">
+            <p>&copy; 2025 Gestão de Pacientes. Todos os direitos reservados. Eduarda Moreira</p>
+        </footer>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

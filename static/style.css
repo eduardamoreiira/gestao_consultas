@@ -1,0 +1,58 @@
+/* Estilização geral */
+body {
+    background-color: #ABBFFF; /* Fundo semelhante à imagem */
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+/* Container principal (que é o do login) */
+.container {
+    height: 100vh;
+}
+
+/* Card de login */
+.login-card {
+    width: 400px;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo do logo */
+.logo {
+    width: 100px;
+    height: auto;
+}
+
+/* Input fields */
+.input-field {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 14px;
+}
+
+/* Botão */
+.btn-primary {
+    background-color: #578FFF;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.btn-primary:hover {
+    background-color: #466FCC;
+}
+
+/* Texto do cabeçalho */
+h2 {
+    color: #466FCC;
+    font-weight: bold;
+}
+
+/* Texto adicional */
+.text-muted {
+    font-size: 12px;
+    color: #888;
+}
