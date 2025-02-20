@@ -19,7 +19,7 @@ def signIn(request):
             return redirect('account:home')
         else:
             # mmensagem de erro
-            messages.error(request, 'Usuário ou senha incorretos.')
+            messages.error(request, 'Usuário não encontrado ou senha incorreta.')
             return redirect('account:login')  # Redireciona de volta para a tela de login
     
     # Se recebermos uma requisição do tipo GET

@@ -59,7 +59,7 @@
     <script>
         function confirmarExclusao(id_paciente, nome) {
             if (confirm(`Tem certeza que deseja excluir o paciente "${nome}"?`)) {
-                fetch(`/excluir_paciente_ajax/${id_paciente}/`, {
+                fetch(`/paciente/excluir_paciente_ajax/${id_paciente}/`, {
                     method: 'POST',
                     headers: {
                         'X-CSRFToken': getCsrfToken(),  // Obtém o token CSRF

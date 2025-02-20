@@ -60,10 +60,10 @@ def detalhe_paciente(request, id_paciente):
 
 
 # função para excluir um paciente
-@csrf_exempt  # Se não estiver usando CSRF Token no JavaScript, mas não recomendado
+@csrf_exempt 
 def excluir_paciente_ajax(request, id_paciente):
     if request.method == "POST":
-        paciente = get_object_or_404(Paciente, id=id_paciente)
+        paciente = get_object_or_404(Paciente, id_paciente=id_paciente)
         paciente.delete()
         return JsonResponse({"success": True})
     
