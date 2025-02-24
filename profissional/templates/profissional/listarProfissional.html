@@ -56,47 +56,46 @@
             justify-content: flex-end;
         }
     </style>
-    <script>
-        function confirmarExclusao(id_paciente, nome) {
-            if (confirm(`Tem certeza que deseja excluir o paciente "${nome}"?`)) {
-                fetch(`/paciente/excluir_paciente_ajax/${id_paciente}/`, {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRFToken': getCsrfToken(),  // Obtém o token CSRF
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ id: id_paciente }) // Envia um JSON com o ID
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            alert(`Paciente "${nome}" excluído com sucesso!`);
-                            window.location.reload(); // Atualiza a página
-                        } else {
-                            alert("Erro ao excluir o paciente.");
-                        }
-                    })
-                    .catch(error => console.error('Erro:', error));
-            }
-        }
 
-        // Função para obter o token CSRF do cookie
-        function getCsrfToken() {
-            let cookieValue = null;
-            let cookies = document.cookie.split(';');
-            for (let i = 0; i < cookies.length; i++) {
-                let cookie = cookies[i].trim();
-                if (cookie.startsWith('csrftoken=')) {
-                    cookieValue = cookie.substring('csrftoken='.length, cookie.length);
-                    break;
+
+<script>
+    function confirmarExclusao(id_profissional, nome) {
+        if (confirm(`Tem certeza que deseja excluir o profissional "${nome}"?`)) {
+            fetch(`/profissional/excluir/${id_profissional}/`, {  // URL corrigida
+                method: 'POST',  // Método POST (ou altere para DELETE se a view permitir)
+                headers: {
+                    'X-CSRFToken': getCsrfToken(),  // Obtém o token CSRF
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id: id_profissional })  // Envia um JSON com o ID
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === "success") {
+                    alert(`Profissional "${nome}" excluído com sucesso!`);
+                    window.location.reload();  // Atualiza a página
+                } else {
+                    alert(`Erro: ${data.message}`);
                 }
-            }
-            return cookieValue;
+            })
+            .catch(error => console.error('Erro:', error));
         }
+    }
 
-    </script>
-
-
+    // Função para obter o token CSRF do cookie
+    function getCsrfToken() {
+        let cookieValue = null;
+        let cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            let cookie = cookies[i].trim();
+            if (cookie.startsWith('csrftoken=')) {
+                cookieValue = cookie.substring('csrftoken='.length, cookie.length);
+                break;
+            }
+        }
+        return cookieValue;
+    }
+</script>
 
     {% if messages %}
     <script>
@@ -131,7 +130,7 @@
                 <a href="{% url 'paciente:listar_paciente' %}">
                     <i class="bi bi-people fs-3"></i> Pacientes
                 </a>
-                <a href="{%  url 'profissional':listar_profissional %}"><i class="bi bi-person-badge fs-3"></i>Profissionais</a>
+                <a href="#"><i class="bi bi-person-badge fs-3"></i>Profissionais</a>
                 <a href="{% url 'account:sair' %}"><i class="bi bi-arrow-repeat fs-3"></i>Sair do Sistema</a>
                 <div class="mt-auto text-center">
                     <a href="https://github.com/eduardamoreiira" class="d-block text-secondary mb-2">Ajuda</a>
@@ -152,47 +151,40 @@
 
                 <div class="table-wrapper">
                     <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h5>Lista de Pacientes</h5>
-                        <div class="input-group" style="width: 300px;">
-                            <input type="text" class="form-control" placeholder="Buscar Paciente">
-                            <button class="btn btn-outline-secondary"><i class="bi bi-search"></i></button>
-                        </div>
-                        <a href="{% url 'paciente:cadastrar_paciente' %}"><button class="btn btn-primary"><i
-                                    class="bi bi-plus-circle me-2"></i>Incluir Paciente</button></a>
-                    </div>
+                        <h5>Lista de Profissionais Cadastrados</h5>
 
+                        <a href="{% url 'profissional:cadastrar_profissional' %}"><button class="btn btn-primary"><i
+                            class="bi bi-plus-circle me-2"></i>Incluir Profissional</button>
+                        </a>
+                    </div>
+                
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Data de Cadastro</th>
-                                <th>Paciente</th>
-                                <th>Ativo</th>
+                                <th>Profissional</th>
+                                <th>Número de Identificação Profissional</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for paciente in pacientes %}
+                            {% for profissional in profissionais %}
                             <tr>
-                                <td>{{ paciente.dt_cadastro|date:"d M, Y" }}</td>
-                                <td>{{ paciente.nome }}</td>
+                                <td>{{ profissional.nome }}</td>
+                                <td>{{ profissional.num_identificaco }}</td>
+
                                 <td>
-                                    {% if paciente.ativo %}
-                                    <i class="bi bi-circle-fill text-success me-1"></i>Sim
-                                    {% else %}
-                                    <i class="bi bi-circle-fill text-danger me-1"></i>Não
-                                    {% endif %}
-                                </td>
-                                <td>
-                                    <a href="{% url 'paciente:editar_paciente' paciente.id_paciente %}"
-                                        class="btn btn-link text-primary" title="Editar"><i
-                                            class="bi bi-pencil"></i></a>
-                                    <!-- acionando o evento de exclusão do paciente -->
-                                    <a href="{% url 'paciente:excluir_paciente_ajax' paciente.id_paciente %}"
-                                    onclick="confirmarExclusao({{ paciente.id_paciente }}, '{{ paciente.nome }}'); return false;"
-                                    class="btn btn-link text-danger btn-delete" title="Excluir">
-                                    <i class="bi bi-trash"></i>
+                                    <a href="{% url 'profissional:editar_profissional' profissional.id_profissional %}" class="btn btn-link text-primary" title="Editar">
+                                        <i class="bi bi-pencil"></i>
                                     </a>
-                                    <a href="{% url 'paciente:detalhe_paciente' paciente.id_paciente %}">
+                                    
+                                    <!-- chamando o evento js de exclusão -->
+                                    <a href="{% url 'profissional:excluir_profissional' profissional.id_profissional %}"
+                                        onclick="confirmarExclusao({{ profissional.id_profissional }}, '{{ profissional.nome }}'); return false;"
+                                        class="btn btn-link text-danger" title="Excluir">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                
+                                    <a href="{% url 'profissional:detalhe_profissional' profissional.id_profissional %}" class="btn btn-link text-primary" title="Detalhes">
                                         <!-- <nte.id button class="btn btn-primary">Ver mais informações</button> -->
                                             <i class="bi bi-eye"></i>
                                     </a>
@@ -200,12 +192,12 @@
                             </tr>
                             {% empty %}
                             <tr>
-                                <td colspan="4" class="text-center">Nenhum paciente encontrado.</td>
+                                <td colspan="4" class="text-center">Nenhum profissional encontrado.</td>
                             </tr>
                             {% endfor %}
                         </tbody>
                     </table>
-
+                
                     <div class="d-flex justify-content-between align-items-center mt-4">
                         <span>Mostrando página <strong>1</strong> de <strong>1</strong></span>
                         <nav>
@@ -218,7 +210,9 @@
                             </ul>
                         </nav>
                     </div>
+                
                 </div>
+                
             </div>
         </div>
     </div>

@@ -10,15 +10,16 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <style>
         .sidebar {
+            overflow-y: auto; 
             background-color: #E0E7FF;
             height: 100vh;
-            padding: 20px 10px;
+            padding: 20px 0px;
         }
         .sidebar a {
             text-decoration: none;
             color: #6B7280;
             display: block;
-            margin: 20px 0;
+            margin: 15px 0;
             text-align: center;
         }
         .sidebar a:hover {
@@ -47,7 +48,7 @@
                 <a href="{% url 'paciente:listar_paciente' %}">
                     <i class="bi bi-people fs-3"></i> Pacientes
                 </a>
-                <a href="#"><i class="bi bi-person-badge fs-3"></i>Profissionais</a>
+                <a href="{% url 'profissional:listar_profissional' %}"><i class="bi bi-person-badge fs-3"></i>Profissionais</a>
                 <a href="{% url 'account:sair' %}"><i class="bi bi-arrow-repeat fs-3"></i>Sair do Sistema</a>
                 <div class="mt-auto text-center">
                     <a href="https://github.com/eduardamoreiira" class="d-block text-secondary mb-2">Ajuda</a>
@@ -64,7 +65,7 @@
                         <span class="me-3">{{ request.user.username }}</span> 
                         <i class="bi bi-person-circle fs-4"></i>
                     </div>
-                </div>\
+                </div>
 
                 <div class="row">
                     <!-- Gráfico de Tratamentos -->
