@@ -13,19 +13,18 @@
         }
 
         .sidebar {
+            overflow-y: auto; 
             background-color: #E0E7FF;
             height: 100vh;
-            padding: 20px 10px;
+            padding: 20px 0px;
         }
-
         .sidebar a {
             text-decoration: none;
             color: #6B7280;
             display: block;
-            margin: 20px 0;
+            margin: 15px 0;
             text-align: center;
         }
-
         .sidebar a:hover {
             color: #4F46E5;
         }
@@ -52,13 +51,15 @@
     </style>
 </head>
 
+
+
 <body>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-2 sidebar d-flex flex-column align-items-center">
                 <img src="https://img.icons8.com/ios/452/mental-health.png" alt="Logo" width="100" class="mb-4">
                 <a href="{% url 'account:home' %}"><i class="bi bi-house-door-fill fs-3"></i>Home</a>
-                <a href="{url 'consulta:listar_consulta'}"><i class="bi bi-calendar-event fs-3"></i> Consultas</a>
+                <a href="{% url 'consulta:listar_consulta' %}"><i class="bi bi-calendar-event fs-3"></i> Consultas</a>
                 <a href="{% url 'paciente:listar_paciente' %}"><i class="bi bi-people fs-3"></i> Pacientes</a>
                 <a href="{url 'profissional:listar_profissional'}"><i
                         class="bi bi-person-badge fs-3"></i>Profissionais</a>
@@ -92,7 +93,7 @@
 
                                 <div class="form-group mb-3">
                                     <label for="profissional">Profissional:</label>
-                                    <select id="profissional" name="profissional" class="form-control" required>
+                                    <select id="profissional" name="id_profissional" class="form-control" required>
                                         <option value="" selected disabled>Selecione um Profissional</option>
                                         {% for profissional in profissionais %}
                                         <option value="{{ profissional.id_profissional }}"> {{ profissional.nome }}
