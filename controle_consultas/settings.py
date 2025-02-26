@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     'account.apps.AccountConfig',
     'paciente.apps.PacienteConfig',
     'profissional.apps.ProfissionalConfig',
+    'tratamento.apps.TratamentoConfig',
+    'consulta.apps.ConsultaConfig',
+    'registro_tratamento.apps.RegistroTratamentoConfig',
 ]
 
 MIDDLEWARE = [

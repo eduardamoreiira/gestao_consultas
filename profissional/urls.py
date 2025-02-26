@@ -12,5 +12,5 @@ urlpatterns = [
     path('detalhe/<int:id_profissional>/', views.detalhe_profissional, name='detalhe_profissional'),
     path('editar/<int:id_profissional>/', views.editar_profissional, name='editar_profissional'),
     path('excluir/<int:id_profissional>/', views.excluir_profissional, name='excluir_profissional'),
-    path('buscar/int:id_profissional>/', views.buscar_profissional, name='buscar_profissional'),
+    #path('buscar/int:id_profissional>/', views.buscar_profissional, name='buscar_profissional'),
 ] 

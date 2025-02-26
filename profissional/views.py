@@ -17,7 +17,6 @@ def cadastrar_profissional(request):
         telefone = request.POST.get('telefone')
         num_identificaco = request.POST.get('num_identificaco')
         sexo = request.POST.get('sexo')
-        id_usuario = request.user.id  #pega o ID do usuário logado para saber qual usuário cadastrou o profissional
 
         try:
             #conectar ao banco e executar o INSERT
@@ -163,23 +162,3 @@ def detalhe_profissional(request, id_profissional):
         return HttpResponse(f"Erro ao visualizar profissional: {str(e)}", status=500)
 
 
-
-#função para buscar um profissional pelo nome, cpf ou num_identificacao
-def buscar_profissional(request):
-    try:
-        if request.method == 'POST':
-            termo = request.POST.get('termo')
-            with connection.cursor() as cursor:
-                # busca o profissional pelo nome, cpf ou num_identificacao e ordena a lista por ordem alfabética
-                cursor.execute("""
-                    SELECT * FROM profissional
-                    WHERE nome LIKE %s OR num_identificacao LIKE %s OR cpf LIKE %s
-                    ORDER BY nome ASC
-                """, (f"%{termo}%", f"%{termo}%"))
-                profissionais = cursor.fetchall()
-
-            return render(request, 'listar_profissionais.html', {'profissionais': profissionais})
-
-    except Exception as e:
-        messages.error(request, f"Erro ao buscar profissional: {str(e)}")
-        return HttpResponse(f"Erro ao buscar profissional: {str(e)}", status=500)

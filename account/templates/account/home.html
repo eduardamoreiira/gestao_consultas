@@ -44,7 +44,7 @@
             <div class="col-md-2 sidebar d-flex flex-column align-items-center">
                 <img src="https://img.icons8.com/ios/452/mental-health.png" alt="Logo" width="100" class="mb-4">
                 <a href="{% url 'account:home' %}"><i class="bi bi-house-door-fill fs-3"></i>Home</a>
-                <a href="#"><i class="bi bi-calendar-event fs-3"></i> Consultas</a>
+                <a href="{% url 'consulta:listar_consulta' %}"><i class="bi bi-calendar-event fs-3"></i> Consultas</a>
                 <a href="{% url 'paciente:listar_paciente' %}">
                     <i class="bi bi-people fs-3"></i> Pacientes
                 </a>
@@ -60,7 +60,8 @@
             <!-- Main Content -->
             <div class="col-md-10 p-4">
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h2>MindCare</h2>
+                    <h2>MindCare - Dados ficticíos</h2>
+                    <p>Os dados são exclusivamente demonstrativos</p>
                     <div class="d-flex align-items-center">
                         <span class="me-3">{{ request.user.username }}</span> 
                         <i class="bi bi-person-circle fs-4"></i>
